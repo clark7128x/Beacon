@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: ankane/pgvector:latest
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: beacon_user
+      POSTGRES_PASSWORD: beacon_password
+      POSTGRES_DB: beacon_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+  # Placeholder for Web (Phase 0)
+  # web:
+  #   build: ./apps/web
+  #   ports:
+  #     - "3000:3000"
+  #   environment:
+  #     - NEXT_PUBLIC_API_URL=http://localhost:3001
+  #   depends_on:
+  #     - api
+
+  # Placeholder for API (Phase 0)
+  # api:
+  #   build: ./apps/api
+  #   ports:
+  #     - "3001:3001"
+  #   environment:
+  #     - DATABASE_URL=postgresql://beacon_user:beacon_password@postgres:5432/beacon_db
+  #     - PORT=3001
+  #   depends_on:
+  #     - postgres
+
+volumes:
+  postgres_data:
